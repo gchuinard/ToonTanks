@@ -12,31 +12,34 @@ void APawnTurret::BeginPlay()
 
     PlayerPawn = Cast<APawnTank>(UGameplayStatics::GetPlayerPawn(this, 0));
 
-    TEST();
 }
 
-void APawnTurret::TEST() 
+void APawnTurret::HandleDestruction() 
 {
-	Super::TEST();
-
-    UE_LOG(LogTemp, Warning, TEXT("Turret Call"));
+    Super::HandleDestruction();
+    Destroy();
 }
 
 // Called every frame
 void APawnTurret::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+    if (PlayerPawn && ReturnDistanceToPlayer() <= FireRange)
+    {
+        RotateTurret(PlayerPawn->GetActorLocation());
+    }
 }
 
 void APawnTurret::CheckFireCondition()
 {
-    if (PlayerPawn)
+    if (!PlayerPawn)
     {
-        UE_LOG(LogTemp, Warning, TEXT("Player exist"));
-        if (ReturnDistanceToPlayer() <= FireRange)
-        {
-            UE_LOG(LogTemp, Warning, TEXT("Fire !"));
-        }
+        return;
+    }
+    UE_LOG(LogTemp, Warning, TEXT("Player exist"));
+    if (ReturnDistanceToPlayer() <= FireRange)
+    {
+        Fire();
     }
 }
 
