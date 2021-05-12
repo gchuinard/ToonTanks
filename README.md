@@ -1,6 +1,6 @@
 # ToonTanks
 
-ToonTanks is a simple game where you drive a tank and have to shoot the enemies turret for win.
+ToonTanks is a simple game where you drive a tank and have to shoot the enemies turrets for win.
 
 Developed in C++ with Unreal Engine 4
 
